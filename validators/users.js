@@ -14,7 +14,8 @@ const validateCreate = [
     check('userDocument','Ingrese su numero de identificación')
     .exists()
     .not()
-    .isEmpty(),
+    .isEmpty()
+    .isNumeric(),
     check('username')
           .not()
           .isEmpty()
