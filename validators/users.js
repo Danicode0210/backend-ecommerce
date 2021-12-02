@@ -11,6 +11,10 @@ const validateCreate = [
     .exists()
     .not()
     .isEmpty(),
+    check('userDocument','Ingrese su numero de identificación')
+    .exists()
+    .not()
+    .isEmpty(),
     check('username')
           .not()
           .isEmpty()

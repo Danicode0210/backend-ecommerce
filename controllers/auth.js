@@ -5,12 +5,15 @@ const {tokenSign} = require('../helpers/tokenGenerate')
 
 const registerCtrl = async (req, res) => {
     try {
-        const {name, lastname, username, password, email} = req.body
+        const {name, lastname, username, idType,
+            userDocument, password, email} = req.body
         const passwordHash = await encrypt(password)
         const registerUser = await userModel.create({
             name, 
             lastname,
-            username, 
+            username,
+            idType,
+            userDocument,
             password: passwordHash, 
             email
         })
