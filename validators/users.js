@@ -3,18 +3,18 @@ const {validateResult} = require('../helpers/validateHelper')
 
 
 const validateCreate = [
-    check('name', 'Ingresa un noombre valido')
+    check('name', 'Ingrese sus nombres completos')
     .exists()
     .not()
     .isEmpty(),
-    check('lastname')
+    check('lastname','Ingrese sus apellidos completos')
     .exists()
     .not()
     .isEmpty(),
     check('username')
           .not()
           .isEmpty()
-          .withMessage('Es necesario ingresar un Nombre de Usuario')
+          .withMessage('Es necesario ingresar un Nombre de usuario')
           .custom((value, {req}) => {
             return new Promise((resolve, reject) => {
               User.findOne({username:req.body.username}, function(err, user){
@@ -29,9 +29,10 @@ const validateCreate = [
             });
           }),
     check('password')
-    .exists()
-    .not()
-    .isEmpty(),
+    .isLength({ min: 5 })
+    .withMessage('La contraseña debe tener más de 8 dígitos y contener números')
+    .matches(/\d/)
+    .withMessage('La contraseña debe contener al menos 2 numeros'),
     check('email')
           .not()
           .isEmpty()
