@@ -8,7 +8,7 @@ const {validateCreate} = require('../validators/users')
 
 router.get('/', checkAuth, checkRoleAuth(['admin']), getItems)
 router.get('/:id', getItems)
-router.post('/', checkOrigin, createItem)
+router.post('/', createItem)
 router.patch('/;id', getItems)
 router.delete('/:id', getItems)
 

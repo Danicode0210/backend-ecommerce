@@ -16,7 +16,7 @@ const checkRoleAuth = (roles) => async (req, res, next) => {
     } catch (e) {
         console.log(e)
         res.status(402)
-        res.send({ error: 'Tu por aqui no pasas!' })
+        res.send({ error: 'Acceso denegado' })
     }
 
 }

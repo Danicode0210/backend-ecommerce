@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const user = require("./routes/auth")
 
-const PORT = process.env.PORT || 3000
+
 
 const app = express()
 app.use(cors())
