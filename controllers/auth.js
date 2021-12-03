@@ -17,7 +17,7 @@ const registerCtrl = async (req, res) => {
             password: passwordHash, 
             email
         })
-        res.send({ data: registerUser})
+        res.json({ data: registerUser})
     } catch (e) {
         httpError(res, e)
     }
@@ -28,22 +28,20 @@ const loginCtrl = async (req, res) => {
         const { username, password } = req.body
         const user = await userModel.findOne({ username })
         if(!user){
-            res.status(404)
-            res.send({error: 'El usuario no existe'})
+            res.json({error: 'El usuario no existe'})
 
         }
         const checkPassword = await compare(password, user.password)
         const tokenSession = await tokenSign(user)
         if(checkPassword){
-            res.send({
+            res.json({
                 data: username,
                 tokenSession
             })
             return
         }
         if(!checkPassword){
-            res.status(409)
-            res.send({
+            res.json({
                 error: 'La contraseña es incorrecta'
             })
             return
