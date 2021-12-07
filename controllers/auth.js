@@ -28,7 +28,8 @@ const loginCtrl = async (req, res) => {
         const { username, password } = req.body
         const user = await userModel.findOne({ username })
         if(!user){
-            res.json({error: 'El usuario no existe'})
+            res.json({msg: 'Nombre de usuario o contraseña, incorrectos',
+        state: false})
 
         }
         const checkPassword = await compare(password, user.password)
@@ -36,13 +37,17 @@ const loginCtrl = async (req, res) => {
         if(checkPassword){
             res.json({
                 data: username,
-                tokenSession
+                tokenSession,
+                msg: 'Bienvenido '+ username,
+                state: true
+
             })
             return
         }
         if(!checkPassword){
             res.json({
-                error: 'La contraseña es incorrecta'
+                msg: 'Nombre de usuario o contraseña, incorrectos',
+                state: false
             })
             return
         }
